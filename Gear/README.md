@@ -1,3 +1,7 @@
 # Gear
 
-Published at https://www.thingiverse.com/thing:2236215
+Published at [Thingiverse](https://www.thingiverse.com/thing:2236215)
+
+Preview:
+
+![Gear](gear.png)

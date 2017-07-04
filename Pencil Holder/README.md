@@ -1,3 +1,7 @@
 # Pencil Holder
 
-Published at https://www.thingiverse.com/thing:2228437
+Published at [Thingiverse](https://www.thingiverse.com/thing:2228437)
+
+Preview:
+
+![Pencil Holder](pencil_holder.png)
