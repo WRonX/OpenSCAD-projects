@@ -14,7 +14,7 @@ armThickness = 5;
 height = 10;
 latchArmThickness = 2; // [1:0.1:3]
 // Simply just tollerance, must be positive for movement
-latchGap = 0.8; // [0.2:0.05:0.8]
+latchGap = 0.4; // [0.2:0.05:0.8]
 pivotGap = 0.4; // [0.2:0.05:0.8]
 // Angle (in degrees) for printing area adjustment
 initialArmsAngle = 30; // [15:15:90] 
