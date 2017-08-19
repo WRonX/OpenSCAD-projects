@@ -66,7 +66,7 @@ module freeArm()
                         linear_extrude(height = height, convexity = 8)
                             _freeArmPlane();
                         translate([0, 0, height / 4])
-                            cube([armThickness - movementGap + 1, armThickness - movementGap, height / 2]);
+                            cube([armThickness + movementGap, armThickness - movementGap, height / 2]);
                         translate([armThickness + movementGap, armThickness - movementGap / 2, height / 2 - sqrt(2) / 2])
                             rotate([45, 0, 0])
                                 cube([armLength, 1, 1]);
