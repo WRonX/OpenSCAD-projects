@@ -4,14 +4,17 @@
  *
  ******************************************************************************/
 
-
+// Overall width of template (with walls)
 width = 100;
+// Plate thickness
 thickness = 4;
 wallThickness = 6;
 wallHeight = 10;
+// Walls distance from rounding ends.
 wallCornerDistance = 10;
-radius1 = 20;
-radius2 = 40;
+textDepth = 1;
+radius1 = 16;
+radius2 = 24;
 
 /* [Hidden] */
 $fa = 1;
@@ -27,8 +30,13 @@ $fs = 0.5;
 
 rotate([90, 0, 45])
 {
-    plate();
+    difference()
+    {
+        plate();
+        descriptions();
+    }
     walls();
+    
 }
 
 /***************************************************************************
@@ -51,6 +59,21 @@ module walls()
     translate([0, 0, thickness - wallHeight])        
         linear_extrude(wallHeight)
             _wallsPlane2();
+}
+
+module descriptions()
+{
+    translate([radius1 * sqrt(2) - radius1, radius1 * sqrt(2) - radius1, 1])
+        rotate([180, 0, 45])
+            linear_extrude(textDepth + 1)
+                text(text = str("←", radius1, "mm"), size = radius1 / 2, valign = "center");
+
+    
+    translate([width - 2 * wallThickness - radius2 * sqrt(2) + radius2, width - 2 * wallThickness - radius2 * sqrt(2) + radius2, thickness - textDepth])
+        rotate([0, 0, 225])
+            linear_extrude(textDepth + 1)
+                #text(str("←", radius2, "mm"), size = radius2 / 2, , valign = "center");
+                
 }
 
 /******************************************************************************
@@ -98,9 +121,9 @@ module _wallsPlane1()
 module _wallsPlane2()
 {
     translate([width - 2 * wallThickness, -wallThickness, 0])
-            square([wallThickness, width - radius2 - wallCornerDistance + wallThickness]);
+            square([wallThickness, width - radius2 - wallCornerDistance]);
     translate([-wallThickness, width - 2 * wallThickness, 0])
-            square([width - radius2 - wallCornerDistance + wallThickness, wallThickness]);
+            square([width - radius2 - wallCornerDistance, wallThickness]);
 }
 
 
