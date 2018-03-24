@@ -7,7 +7,7 @@ topRingHeight = 4;
 wallThickness = 2;
 twistDegrees = 90;
 spokesCount = 16;
-spokesStart = 2; // [1: The same place, 2: Next to each other, 3: The same distance]
+spokesStart = 3; // [1: The same place, 2: Next to each other, 3: The same distance]
 spokesShape = 1; // [1: Circular, 2: Square]
 bottomRing = 1; // [1: Yes, 0: No]
 // Not needed if no bottom ring
@@ -47,7 +47,7 @@ module spokeSide(twist)
     translate([0, 0, bottomThickness + (bottomRing ? bottomRingHeight : 0)])
         linear_extrude(height = height - bottomThickness - topRingHeight - (bottomRing ? bottomRingHeight : 0), twist = twist)
             translate([0, width / 2 - wallThickness / 2, 0])
-                circle(r = wallThickness / 2, $fn = (spokesShape == 2 ? 4 : $fn));
+                circle(r = wallThickness / 2, $fn = (spokesShape == 2 ? 4 : 20));
 }
 
 module spokeSideRotate(twist)
