@@ -6,7 +6,7 @@
 
 
 /* [General] */
-gearType = 3; //[1: Regular gear, 2: Helix gear, 3: Double helix gear, 4: Herringbone gear]
+gearType = 4; //[1: Regular gear, 2: Helix gear, 3: Double helix gear, 4: Herringbone gear]
 // Radius from center to teeth base (!)
 wheelRadius = 40;
 outerThickness = 20;
@@ -32,7 +32,7 @@ wheelarmHolerRoundness = 2;
 
 /* [Teeth configuration] */
 // Not needed for regular gear
-herringboneAngle = 15; 
+herringboneAngle = 30; 
 // Needed only for herringbone gear
 herringboneSpaceWidth = 2;
 teethCount = 44;
@@ -164,26 +164,30 @@ module _regularGear()
 module _helixGear()
 {
     _halfGear(herringboneAngle);
-    translate([0, 0, outerThickness / 2])    
-        rotate([0, 0, -herringboneAngle])
+    
+    c = wheelRadius * 2 * 3.14159;
+    opp = (tan(herringboneAngle) * outerThickness/2);
+
+    translate([0, 0, outerThickness / 2])  
+        rotate([0, 0, -opp/c * 360])
             _halfGear(herringboneAngle);
 }
 
 module _doubleHelixGear()
 {
-    _halfGear(-herringboneAngle);
-    translate([0, 0, outerThickness / 2])    
-        rotate([0, 0, herringboneAngle])
-            _halfGear(herringboneAngle);
+    difference()
+    {
+        _herringboneGear();
+        _herringboneSpace();
+    }   
 }
 
 module _herringboneGear()
 {
-    difference()
-    {
-        _doubleHelixGear();
-        _herringboneSpace();
-    }   
+    _halfGear(herringboneAngle);
+    translate([0, 0, outerThickness])    
+    mirror([0,0,1]) _halfGear(herringboneAngle);
+    
 }
 
 module _minkowskiInside(mask = [9999, 9999]) // "Intel Inside"! No...
@@ -253,7 +257,10 @@ module _herringboneSpace()
 
 module _halfGear(twist = 0)
 {
-    linear_extrude(height = outerThickness / 2, twist = twist, convexity = 8)
+    c = wheelRadius * 2 * 3.14159;
+    opp = (tan(twist) * outerThickness/2);
+
+    linear_extrude(height = outerThickness / 2, twist = opp/c*360, convexity = 8)
         for(i = [0: 360 / teethCount: 360])
             rotate([0, 0, i])
                 translate([wheelRadius, 0, 0])
