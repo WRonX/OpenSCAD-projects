@@ -334,9 +334,13 @@ module _centerHole()
     if(centerHole > 0)
     {
         translate([0, 0, -1])
-        if(centerHole == 2){
-            translate([0,0,(innerThickness + outerThickness) / 2])_hexagon(centerHoleDiameter, innerThickness + outerThickness);
-        } else {
+        if(centerHole == 2)
+        {
+            translate([0,0,(innerThickness + outerThickness) / 2])
+                _hexagon(centerHoleDiameter, innerThickness + outerThickness);
+        } 
+        else 
+        {
             cylinder(r = centerHoleDiameter / 2, h = innerThickness + outerThickness);
         }
             
@@ -385,7 +389,10 @@ module _innerGearPositive()
         cylinder(r = wheelRadius - outerRingThickness, h = innerThickness);
 }
 
-module _hexagon(size, height) {
-  boxWidth = size/1.75;
-  for (r = [-60, 0, 60]) rotate([0,0,r]) cube([boxWidth, size, height], true);
+module _hexagon(size, height) 
+{
+    boxWidth = size / 1.75;
+    for (r = [-60, 0, 60]) 
+        rotate([0,0,r]) 
+            cube([boxWidth, size, height], true);
 }
